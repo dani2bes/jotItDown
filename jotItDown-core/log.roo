@@ -1,0 +1,78 @@
+// Spring Roo 1.3.1.RC1 [rev 4877cfb] log opened at 2015-01-05 19:46:19
+hint
+project --topLevelPackage org.dani2bes.jotitdown
+hint
+jpa setup --provider HIBERNATE --database HYPERSONIC_PERSISTENT 
+hint
+entity jpa --class ~.domain.Label --activeRecord false
+// [failed] entity jpa --class ~.domain.User --activeRecord false
+entity jpa --class ~.domain.Note --activeRecord false
+entity jpa --class ~.domain.NoteUser --activeRecord false
+hint
+quit
+// Spring Roo 1.3.1.RC1 [rev 4877cfb] log closed at 2015-01-05 19:58:11
+// Spring Roo 1.3.1.RC1 [rev 4877cfb] log opened at 2015-01-05 20:07:20
+hint
+class --class ~.domain.Label
+entity jpa --class ~.domain.Label --activeRecord false
+field string --fieldName name 
+entity jpa --class ~.domain.Label --activeRecord false --versionColumn version --versionType int --testAutomatically 
+focus --class ~.domain.Note
+entity jpa --class ~.domain.Note --activeRecord false --versionColumn version --versionType int --testAutomatically 
+field string --fieldName title 
+field string --fieldName text
+focus --class ~.domain.NoteUser
+entity jpa --class ~.domain.NoteUser --activeRecord false --versionColumn version --versionType int --testAutomatically 
+field email template 
+quit
+// Spring Roo 1.3.1.RC1 [rev 4877cfb] log closed at 2015-01-05 20:32:09
+// Spring Roo 1.3.1.RC1 [rev 4877cfb] log opened at 2015-01-06 13:03:42
+focus --class ~.domain.Label
+field string --fieldName name
+focus --class ~.domain.NoteUser
+field string --fieldName email --notNull --regexp ^([0-9a-zA-Z]([-.\w]*[0-9a-zA-Z])*@([0-9a-zA-Z][-\w]*[0-9a-zA-Z]\.)+[a-zA-Z]{2,9})$
+focus --class ~.domain.Label
+// [failed] field string --fieldName name --notNull 
+focus --class ~.domain.Note
+field date --fieldName lastModified --type java.util.Date --notNull 
+focus --class ~.domain.NoteUser
+field string --fieldName password --notNull 
+// Spring Roo 1.3.1.RC1 [rev 4877cfb] log opened at 2015-01-11 11:08:31
+focus --class ~.domain.Label
+quit
+// Spring Roo 1.3.1.RC1 [rev 4877cfb] log closed at 2015-01-11 11:21:14
+// Spring Roo 1.3.1.RC1 [rev 4877cfb] log opened at 2015-01-11 11:21:20
+// [failed] focus --class ~.domain.Tag
+quit
+// Spring Roo 1.3.1.RC1 [rev 4877cfb] log closed at 2015-01-11 11:25:43
+// Spring Roo 1.3.1.RC1 [rev 4877cfb] log opened at 2015-01-11 11:25:49
+hint 
+entity jpa --class ~.domain.Tag --testAutomatically --activeRecord false 
+focus --class ~.domain.Tag
+field string --fieldName name
+field set --fieldName taggedNotes --type ~.domain.Note --cardinality MANY_TO_MANY
+quit
+// Spring Roo 1.3.1.RC1 [rev 4877cfb] log closed at 2015-01-11 11:33:11
+// Spring Roo 1.3.1.RC1 [rev 4877cfb] log opened at 2015-01-11 11:33:15
+focus --class ~.domain.Note
+field set --fieldName tags --cardinality MANY_TO_MANY --type ~.domain.Tag
+focus --class ~.domain.Tag
+field set --fieldName notes --cardinality MANY_TO_MANY --type ~.domain.Note --mappedBy tags
+focus --class ~.domain.NoteUser
+quit
+// Spring Roo 1.3.1.RC1 [rev 4877cfb] log closed at 2015-01-11 12:23:31
+// Spring Roo 1.3.1.RC1 [rev 4877cfb] log opened at 2015-01-11 12:23:36
+focus --class ~.domain.NoteUser
+field set --fieldName notes --type ~.domain.Note --cardinality ONE_TO_MANY --mappedBy note
+field reference --class ~.domain.Note --fieldName noteUsers --cardinality MANY_TO_ONE --type ~.domain.NoteUser
+test integration --entity ~.domain.Note 
+test integration --entity ~.domain.NoteUser
+test integration --entity ~.domain.Tag
+repository jpa --interface ~.repository.TagRepository --entity ~.domain.Tag 
+repository jpa --interface ~.repository.NoteRepository --entity ~.domain.Note 
+repository jpa --interface ~.repository.NoteUserRepository --entity ~.domain.NoteUser 
+service type --interface ~.service.NoteService --entity ~.domain.Note
+service type --interface ~.service.TagService --entity ~.domain.Tag
+service type --interface ~.service.NoteUserService --entity ~.domain.NoteUser
+quit
+// Spring Roo 1.3.1.RC1 [rev 4877cfb] log closed at 2015-01-11 17:05:49
